@@ -1,0 +1,9 @@
+{% extends "my_vacation/base.html" %}
+{% block main %}
+<div class="container">
+    <div class="row">
+        名無しさん(未ログインアカウント)による投稿、もしくは投稿者以外による削除はできません。
+        <a href="{% url 'my_vacation:index' %}">Topに戻る</a>
+    </div>
+</div>
+{% endblock %}

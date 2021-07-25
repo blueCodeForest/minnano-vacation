@@ -1,0 +1,53 @@
+{% extends 'my_vacation/base.html' %}
+{% load static %}
+{% block main %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 mx-auto">
+                <h2>マイバケーション一覧</h2>
+                <div class="mb-3">
+                    {% include "my_vacation/search_my_vacation.html" %}
+                </div>
+                <div class="mb-4">
+                    {% for my_vacation in my_vacations %}
+                    <div class="card mb-3">
+                        <a href="{% url 'my_vacation:detail' my_vacation.id %}" class="card-body text-dark normal">
+                            <h4 class="card-title mb-3">{{ my_vacation.title }}{% if not my_vacation.published %}<i class="fas fa-lock"></i>{% endif %}</h4>
+                            {% if my_vacation.user %}
+                            <p class="card-text">{{ my_vacation.user.name }}</p>
+                            {% else %}
+                            <p class="card-text">名無しさん</p>
+                            {% endif %}
+                            <span>
+                                やってみたい
+                                <form action="" method="POST" class="inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="yaritai" value="{{ my_vacation.id }}">
+                                    <input type="submit" value="&#xf164;" class="far">
+                                </form>
+                                ({{ my_vacation.yaritai }})
+                            </span>
+                            <span>
+                                マイバケーションにコピー
+                                <form action="{% url 'my_vacation:duplicate' %}" method="POST" class="inline">
+                                    {% csrf_token %}
+                                    <input type="submit" value="&#xf24d;" class="far">
+                                </form>
+                                ({{ my_vacation.copied }})
+                            </span>
+                        </a>
+                    </div>
+                    {% endfor %}
+                    <div class="py-3 text-center">
+                        <a href="{% url 'my_vacation:create' %}" class="btn btn-primary">バケーションを投稿する</a>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    {% include 'includes/pagination.html'%}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

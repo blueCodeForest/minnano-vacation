@@ -1,0 +1,27 @@
+<form class="form-inline my-2 my-lg-0" action="{% url 'my_vacation:search_my_vacation' %}" method="GET">
+    <input type="search" name="title" value="{{ request.GET.title }}" placeholder="キーワード">
+    <span>
+        <label for="id_with_who">誰と:</label>
+        <select name="with_who" id="id_with_who">
+            <option value selected>--------</option>
+            <option value="0">ひとりで</option>
+            <option value="1">恋人と</option>
+            <option value="2">友達と</option>
+            <option value="3">家族と</option>
+            <option value="4">見知らぬ誰かと</option>
+        </select>
+    </span>
+    <span>
+        <label for="id_time_required">所要時間:</label>
+        <select name="time_required" id="id_time_required">
+            <option value selected>--------</option>
+            <option value="0">1時間以内</option>
+            <option value="1">2~3時間</option>
+            <option value="2">半日</option>
+            <option value="3">1日</option>
+            <option value="4">1泊以上</option>
+        </select>
+    </span>
+    <span class="ml-3">〜円: <input type="search" name="cost" value="{{ request.GET.cost }}" placeholder="数字のみ入力"></span>
+    <button clas="btn btn-outline-secondary btn-sm ml-3" type="submit">検索</button>
+</form>

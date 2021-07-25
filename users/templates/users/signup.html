@@ -1,0 +1,26 @@
+{% extends "my_vacation/base.html" %}
+{% block main %}
+<form action="" method="POST">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-body">
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                    <hr>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary btn-lg btn-block" >新規登録する</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+                {% csrf_token %}
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+<!-- テストユーザー
+    email : yyy@yyy.com
+    name : 新参者
+    パスワード : Pt7zcU9B -->
